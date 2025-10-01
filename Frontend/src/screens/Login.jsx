@@ -36,6 +36,7 @@ function App() {
       console.log("User data:", userData);
       if (userData) {
         const { role } = userData;
+        console.log("User role:", role);
         if (role === "user") {
           navigate("/userScreen");
         } else if (role === "shopOwner") {

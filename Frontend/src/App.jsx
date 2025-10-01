@@ -7,13 +7,14 @@ import { StorePage } from './screens/Store';
 import CreateStore from './screens/CreateStore';
 import { OwnerStoreDashboard } from './screens/OwnerDashboard';
 import SingleStorePage from './screens/StoreItem';
-import Dashboard from './screens/AdminDashboard';
 import AdminDashboard from './screens/AdminDashboard';
 import ProtectedRoute from './components/protectedRoute';
 
 const App = () => {
 
 const user = JSON.parse(localStorage.getItem("user"));
+
+console.log(user[0].role)
 
   return (
      <>
