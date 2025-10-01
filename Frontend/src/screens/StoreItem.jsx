@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import axios from "axios";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import StarRating from "@/components/StarRatingInput";
 import { API_URL } from "@/store/API/store";
 import { TopBar } from "@/components/TopBar";
+import customAxios from "@/utils";
 
 const SingleStorePage = () => {
   const { storeId } = useParams();
@@ -30,7 +30,7 @@ const SingleStorePage = () => {
         setIsLoading(true);
         setStore(storeData);
 
-        const res = await axios.get(`${API_URL}/rating/${userId}/${storeData._id}`);
+        const res = await customAxios.get(`${API_URL}/rating/${userId}/${storeData._id}`);
         // console.log(res.data);
         if (res.data) {
           setCurrentRating(res.data.rating);
@@ -50,7 +50,7 @@ const SingleStorePage = () => {
     useEffect(() => {
     const getRatings = async () => {
       try {
-        const res = await axios.get(`${API_URL}/rating/${storeData._id}`);
+        const res = await customAxios.get(`${API_URL}/rating/${storeData._id}`);
         console.log(res.data);
         if (res.data) {
           setAverageRating(res.data.averageRating);
@@ -71,7 +71,7 @@ const SingleStorePage = () => {
 
     const handleRatingSubmit = async () => {
         try {
-        await axios.post(`${API_URL}/rating/${userId}/${storeData._id}`, {
+        await customAxios.post(`${API_URL}/rating/${userId}/${storeData._id}`, {
             rating: newRating,
         });
         setCurrentRating(newRating);
@@ -84,7 +84,7 @@ const SingleStorePage = () => {
 
     const handleDeleteRating = async () => {
         try {
-            await axios.delete(`${API_URL}/rating/${userId}/${storeData._id}`);
+            await customAxios.delete(`${API_URL}/rating/${userId}/${storeData._id}`);
             setCurrentRating(0);
             alert("Rating deleted successfully!");
         } catch (error) {

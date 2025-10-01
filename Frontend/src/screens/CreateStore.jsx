@@ -8,7 +8,8 @@ import { userRegister} from "../store/API/Auth";
 import { useNavigate } from "react-router-dom";
 import { TopBar } from '@/components/TopBar';
 import { API_URL, createStore } from '@/store/API/store';
-import axios from 'axios';
+import customAxios from '@/utils';
+
 
 function CreateStore() {
 
@@ -31,7 +32,7 @@ function CreateStore() {
 
   useEffect(()=>{
     const checkStore = async () => {
-        const res = await axios.get(`${API_URL}/store/${userId}`)
+        const res = await customAxios.get(`${API_URL}/store/${userId}`)
         if(res.data.length === 1){
             console.log("store there")
             navigate("/OwnerDashboard")

@@ -6,8 +6,8 @@ import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Button } from './ui/button';
 import { API_URL, createStore } from '@/store/API/store';
-import axios from 'axios';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+import customAxios from '@/utils';
 
 
 export function CreateStore({ isModal = false, closeModal }) {
@@ -29,7 +29,7 @@ export function CreateStore({ isModal = false, closeModal }) {
         const getAllUsersNames = async () => {
             try {
 
-                const res = await axios.get(`${API_URL}/admin/users/names`);
+                const res = await customAxios.get(`${API_URL}/admin/users/names`);
                 console.log(res.data);
                 setUsers(res.data);
             } catch (e) {

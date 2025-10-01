@@ -2,7 +2,7 @@ import { TopBar } from "@/components/TopBar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { API_URL } from "@/store/API/store";
-import axios from "axios";
+import customAxios from "@/utils";
 import { Star, Store, User } from "lucide-react"; 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -35,7 +35,7 @@ export function OwnerStoreDashboard() {
   useEffect(() => {
     const fetchStoreDetails = async () => {
       try {
-        const res = await axios.get(`${API_URL}/store/${userId}`);
+        const res = await customAxios.get(`${API_URL}/store/${userId}`);
         setStore(res.data?.[0]);
       } catch (error) {
         console.error("Error fetching store details:", error);
@@ -49,7 +49,7 @@ export function OwnerStoreDashboard() {
     if (!store?._id) return;
     const fetchUserRatings = async () => {
       try {
-        const res = await axios.get(`${API_URL}/rating/${store?._id}`);
+        const res = await customAxios.get(`${API_URL}/rating/${store?._id}`);
         console.log("trigger")
         setUserRatings(res.data.ratings);
       } catch (error) {

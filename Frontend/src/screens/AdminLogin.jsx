@@ -55,13 +55,13 @@ function AdminLogin() {
         <h2 className="text-2xl font-bold text-center">Admin Login</h2>
 
         <div>
-          <Label htmlFor="email" className="pb-1">Email</Label>
+          <Label htmlFor="email" className="pb-1">Email -(sriramamirishetty@gmail.com)</Label>
           <Input id="email" type="email" placeholder="Enter your email" value={formData.email}
               onChange={handleChange} />
         </div>
 
         <div>
-          <Label htmlFor="password" className="pb-1">Password</Label>
+          <Label htmlFor="password" className="pb-1">Password -(12345678@S)</Label>
           <Input id="password" type="password" placeholder="Enter your password" value={formData.password}
               onChange={handleChange} />
         </div>

@@ -7,9 +7,8 @@ import { CardContent,Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ChevronUp, ChevronDown } from "lucide-react";
-import axios from 'axios';
 import { API_URL } from '@/store/API/store';
-import { clearUserSession } from '@/utils';
+import customAxios, { clearUserSession } from '@/utils';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -28,7 +27,7 @@ const AdminDashboard = () => {
     useEffect(() => {
         const getAllUsers = async () => {
             try{
-                const res = await axios.get(`${API_URL}/admin/users/all`)
+                const res = await customAxios.get(`${API_URL}/admin/users/all`)
                 setUsers(res.data);
             }catch(e){
                 console.error("Error fetching users:", e);
@@ -40,7 +39,7 @@ const AdminDashboard = () => {
 
       const toggleRole = async(id) => {
 
-        await axios.patch(`${API_URL}/admin/users/role/${id}`);
+        await customAxios.patch(`${API_URL}/admin/users/role/${id}`);
 
          setUsers((prev) =>
            prev.map((user) =>
@@ -105,7 +104,7 @@ const AdminDashboard = () => {
                         <DialogContent className="sm:max-w-[425px]">
                             <DialogHeader>
                                 <DialogTitle>Create New User</DialogTitle>
-                                <DialogDescription>Register a new user (admin/shop owner/customer).</DialogDescription>
+                                <DialogDescription>Register a new user (shop owner/customer).</DialogDescription>
                             </DialogHeader>
                             <div className="py-4">
                                 <Register 
@@ -265,7 +264,7 @@ export default AdminDashboard;
       useEffect(() => {
         const getAllStores = async () => {
             try{
-                const res = await axios.get(`${API_URL}/store/get/all`)
+                const res = await customAxios.get(`${API_URL}/store/get/all`)
                 console.log(res.data);
                 setStores(res.data);
             }catch(e){
@@ -410,12 +409,12 @@ export default AdminDashboard;
     useEffect(() => {
        const getDetails = async () => {
             try {
-                const usersRes = await axios.get(`${API_URL}/admin/users`);
+                const usersRes = await customAxios.get(`${API_URL}/admin/users`);
                 setUserCount(usersRes.data);
                 // console.log(usersRes.data);
-                const storesRes = await axios.get(`${API_URL}/admin/stores`);
+                const storesRes = await customAxios.get(`${API_URL}/admin/stores`);
                 setStoreCount(storesRes.data);
-                const ratingsRes = await axios.get(`${API_URL}/admin/ratings`);
+                const ratingsRes = await customAxios.get(`${API_URL}/admin/ratings`);
                 setRatingCount(ratingsRes.data);
             } catch (error) {
                 console.error("Error fetching admin details:", error);

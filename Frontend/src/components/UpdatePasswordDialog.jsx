@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useSelector } from 'react-redux';
 import { API_URL } from '@/store/API/store';
-import axios from 'axios';
+import customAxios from '@/utils';
 
 export function UpdatePasswordDialog({ children }) {
 
@@ -42,7 +42,7 @@ export function UpdatePasswordDialog({ children }) {
       return;
     }
 
-    await axios.post(`${API_URL}/auth/update-password`, formData)
+    await customAxios.post(`${API_URL}/auth/update-password`, formData)
 
     alert(`Password update request for ${formData.email} submitted. Check console for details.`);
     setOpen(false);

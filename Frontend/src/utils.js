@@ -14,3 +14,28 @@ export const storeData = [
   { id: 3, name: 'Tech Repair Hub', rating: 4.9, description: 'Expert technical support for all your gadgets.' },
   { id: 4, name: 'Global Cuisine Bistro', rating: 4.2, description: 'A fusion of flavors from around the world.' },
 ];
+
+import axios from "axios";
+// import { store } from "./store/reducer";
+
+const customAxios = axios.create();
+
+customAxios.interceptors.request.use(
+  (config) => {
+
+     const token = localStorage.getItem("user")
+      ? JSON.parse(localStorage.getItem("user"))[0]?.token
+      : null;
+
+    if (token) {
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
+
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+export default customAxios;
+
+
