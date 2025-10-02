@@ -8,11 +8,11 @@ export function StoreCard({ store }) {
         <CardTitle>{store.name}</CardTitle>
         <CardDescription className="flex items-center space-x-1">
           <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-          <span>{store.overallRating} Overall Rating</span>
+          <span>{store?.overallRating} Overall Rating</span>
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <p className="text-sm text-gray-600 truncate">{store.address}</p>
+        <p className="text-sm text-gray-600 truncate">{store?.address}</p>
       </CardContent>
     </Card>
   );
